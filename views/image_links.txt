@@ -1,0 +1,12 @@
+    var Images ={                             
+                            shed_open:"https://bit.ly/2SgsCnS",   
+                            shed_close:"https://bit.ly/2Xkw848",  
+                            rainy:"https://bit.ly/2T3oigj",       
+                            cloudy:"https://bit.ly/2Ix8KNw",      
+                            sunny:"https://bit.ly/2tzkeGf",       
+                            pump_off:"https://bit.ly/2Nn5QtE",    
+                            pump_on:"https://bit.ly/2SRDbD0",     
+                            very_dry_soil:"https://bit.ly/2Nl4gbK",
+                            wet_soil:"https://bit.ly/2Xs5GpA",    
+                            dry_soil:"https://bit.ly/2Te2sXi"     
+                        } ; 
