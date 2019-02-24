@@ -11,8 +11,11 @@ var response = {
     list: [], 
     data: {
         airquality:{},
-        observations: {}
-        
+        observations: {
+            tempC : 20,
+            humidity : 22,
+            weather : "rainy"
+        }
     }//undefined
 };
 
@@ -53,6 +56,12 @@ function dataCollect(option, callback){
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    Water.find({}, "moisture",(err,data)=>{
+      if (err) throw err;
+      const dataX = data[data.length - 1];
+      console.log(dataX);
+      res.render('index', {mosiStatus: dataX.moisture,data: response.data.observations});
+    });
     /*let options = {
 	    method: 'GET',
 	    url: `https://api.aerisapi.com/airquality/vellore,india?&format=json&client_id=${config.access_id}&client_secret=${config.secret_key}` 
@@ -76,12 +85,59 @@ router.get('/', function(req, res, next) {
             
         });
     });*/
-    res.render('index');
+    
+    
     //res.render('index', { image: Images});
 });
 
+//value getting
+
+
+
 //water pump controller 
-router.get("/pump/controller",(req,res)=>{
+router.post("/pump/controller",(req,res)=>{
+    console.log(req.body);
+    Water.create({moisture: req.body.value}, (err, created)=>{
+        if (err){
+            response.status = "NOT";
+            throw err;
+        }
+        res.json(response);
+    });
+    //res.json(response);
+    /*let options = {
+	    method: 'GET',
+	    url: `https://api.aerisapi.com/airquality/vellore,india?&format=json&client_id=${config.access_id}&client_secret=${config.secret_key}` 
+    };
+     
+    dataCollect(options, (observations)=>{
+        response.data.airquality = observations.response[0].periods[0];
+        response.data.airquality.pollutants = undefined;
+        response.data.airquality.dateTimeISO = undefined;
+        response.data.airquality.timestamp = undefined;
+        
+        options.url = `https://api.aerisapi.com/observations/chennai,india?&format=json&filter=allstations&limit=1&client_id=${config.access_id}&client_secret=${config.secret_key}`;
+    
+        dataCollect(options, (data)=>{
+            const newData = data.response.ob;
+            response.data.observations.tempC = newData.tempC;
+            response.data.observations.humidity = newData.humidity;
+            response.data.observations.weather = newData.weather;
+            //res.json(response);
+            console.log(response.data);
+            Water.findOne({}, "moisture",(err,data)=>{
+                if (err)
+                    throw err;
+                console.log(data);
+                console.log(response.data);
+                res.json(response.data);
+            });
+        });
+    });*/
+});
+
+//water pump controller 
+router.get("/something",(req,res)=>{
     let options = {
 	    method: 'GET',
 	    url: `https://api.aerisapi.com/airquality/vellore,india?&format=json&client_id=${config.access_id}&client_secret=${config.secret_key}` 

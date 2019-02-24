@@ -58,26 +58,52 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="card" style="width: 18rem;">
+                            <% if (mosiStatus<20){ %>    
+                                <img src="/images/very_dry_soil.jpg" class="card-img-top img-card" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Soil Moisture : <%= (mosiStatus) %></p>
+                                </div>
+                            <% } else if (mosiStatus> 20 && mosiStatus<60){ %>
+                                <img src="/images/dry_soil.jpg" class="card-img-top img-card" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Soil Moisture : <%= (mosiStatus) %></p>
+                                </div>
+                            <% }else { %>
                                 <img src="/images/wet_soil.jpg" class="card-img-top img-card" alt="...">
                                 <div class="card-body">
-                                    <p class="card-text">Soil Moisture : 74</p>
+                                    <p class="card-text">Soil Moisture : <%= (mosiStatus) %></p>
                                 </div>
+                            <% } %>    
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="card" style="width: 18rem;">
+                            <% if(data.weather == "rainy" || (data.weather == "sunny" && data.tempC >25)){ %>    
+                                <img src="/images/shed_closed.JPG" class="card-img-top img-card" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Shed Status : Closed</p>
+                                </div>
+                            <% }else{ %>
                                 <img src="/images/shed_open.JPG" class="card-img-top img-card" alt="...">
                                 <div class="card-body">
                                     <p class="card-text">Shed Status : Open</p>
                                 </div>
+                            <% } %>
                             </div> 
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="card" style="width: 18rem;">
+                            <%   if (mosiStatus>50){ %>
                                 <img src="/images/pump_off.jpg" class="card-img-top img-card" alt="...">
                                 <div class="card-body">
                                     <p class="card-text">Water Pump : OFF</p>
                                 </div>
+                            <% }else{ %>
+                                <img src="/images/pump_on.jpg" class="card-img-top img-card" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Water Pump : ON</p>
+                                </div>
+                            <% } %>
                             </div>
                         </div>
                     </div>
@@ -101,19 +127,26 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="card" style="width: 18rem;">
+                                <% if(data.weather == "rainy"){ %>
+                                    <img src="/images/rainy.jpg" class="card-img-top img-card" alt="...">
+                                    <div class="card-body">
+                                        <p class="card-text">Weather: Rainy</p>
+                                    </div>
+                                <% }else{ %>
                                     <img src="/images/sunny.jpg" class="card-img-top img-card" alt="...">
                                     <div class="card-body">
                                         <p class="card-text">Weather: Mostly Sunny</p>
                                     </div>
+                                <% } %>    
                                 </div> 
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="card" style="width: 18rem;">
                                     <div class="card-body">
-                                        <p class="card-text">Temperature: 35C</p>
+                                        <p class="card-text">Temperature: <%= data.tempC %></p>
                                     </div><hr>
                                     <div class="card-body">
-                                        <p class="card-text">Humidity: 22%</p>
+                                        <p class="card-text">Humidity: <%= data.humidity %>%</p>
                                     </div>
                                 </div>
                             </div>
@@ -143,4 +176,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
+    
+
+        window.location.reload()
 </html>
