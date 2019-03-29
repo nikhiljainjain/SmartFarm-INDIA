@@ -12,7 +12,7 @@ var response = {
     data: {
         airquality:{},
         observations: {
-            tempC : 20,
+            tempC : 40,
             humidity : 22,
             weather : "rainy"
         }
